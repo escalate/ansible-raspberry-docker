@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Felix Boerner
+  description: Manage Docker CE service
+  license: MIT
+  min_ansible_version: 2.9
+  github_branch: master
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+  galaxy_tags:
+    - raspberry
+    - pi
+    - raspberrypi
+    - docker
+dependencies: []
