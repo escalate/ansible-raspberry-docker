@@ -22,8 +22,23 @@
     update_cache: true
   vars:
     packages:
-      - docker-ce
-      - docker-ce-cli
+      - "docker-ce={{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}"
+      - "docker-ce-cli={{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}"
+
+- name: Add version pinning for Docker packages
+  copy:
+    content: |
+            Package: docker-ce
+            Pin: version {{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}
+            Pin-Priority: 1000
+
+            Package: docker-ce-cli
+            Pin: version {{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}
+            Pin-Priority: 1000
+    dest: /etc/apt/preferences.d/docker
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Start and enable Docker daemon
   systemd:
