@@ -45,6 +45,15 @@
     group: root
     mode: 0644
 
+- name: Add Docker system prune cron job
+  cron:
+    name: docker_system_prune
+    minute: "30"
+    hour: "3"
+    user: root
+    job: "docker system prune --volumes --force"
+  when: docker_system_prune_cron
+
 - name: Start and enable Docker daemon
   systemd:
     name: docker
