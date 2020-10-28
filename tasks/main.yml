@@ -1,27 +1,27 @@
 - name: Load variables for ARMv7 systems
-  include_vars:
+  ansible.builtin.include_vars:
     file: armv7.yml
   when: ansible_architecture == 'armv7l'
 
 - name: Install Docker SDK for Python
-  pip:
+  ansible.builtin.pip:
     name: "docker=={{ docker_python_version }}"
     state: present
 
 - name: Add Docker GPG key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     state: present
 
 - name: Setup Docker repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch={{ docker_package_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} stable"
     state: present
     filename: docker-ce-stable
 
 - name: Install Docker packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
     update_cache: true
@@ -31,7 +31,7 @@
       - "docker-ce-cli={{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}"
 
 - name: Add version pinning for Docker packages
-  copy:
+  ansible.builtin.copy:
     content: |
             Package: docker-ce
             Pin: version {{ docker_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}
@@ -46,7 +46,7 @@
     mode: 0644
 
 - name: Add Docker system prune cron job
-  cron:
+  ansible.builtin.cron:
     name: docker_system_prune
     minute: "30"
     hour: "3"
@@ -55,14 +55,14 @@
   when: docker_system_prune_cron
 
 - name: Start and enable Docker daemon
-  systemd:
+  ansible.builtin.systemd:
     name: docker
     state: started
     enabled: true
     daemon_reload: true
 
 - name: Configure Docker daemon
-  template:
+  ansible.builtin.template:
     src: daemon.json.j2
     dest: /etc/docker/daemon.json
     owner: root
