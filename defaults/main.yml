@@ -2,3 +2,9 @@ docker_version: 5:19.03.11~3
 docker_package_arch: amd64
 docker_python_version: 4.2.2
 docker_system_prune_cron: true
+docker_daemon_json:
+  live-restore: true
+  log-driver: json-file
+  log-opts:
+    max-size: 100m
+    max-file: 7

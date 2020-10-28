@@ -62,8 +62,8 @@
     daemon_reload: true
 
 - name: Configure Docker daemon
-  copy:
-    src: daemon.json
+  template:
+    src: daemon.json.j2
     dest: /etc/docker/daemon.json
     owner: root
     group: root
