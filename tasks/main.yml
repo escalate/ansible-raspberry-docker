@@ -3,6 +3,12 @@
     file: armv7.yml
   when: ansible_architecture == 'armv7l'
 
+- name: Install Docker SDK prerequisites
+  ansible.builtin.apt:
+    name: python-backports.ssl-match-hostname
+    state: present
+    update_cache: true
+
 - name: Install Docker SDK for Python
   ansible.builtin.pip:
     name: "docker=={{ docker_python_version }}"
