@@ -1,5 +1,7 @@
 # Ansible Role: Raspberry - Docker
 
+[![CI](https://github.com/escalate/ansible-raspberry-docker/workflows/CI/badge.svg?event=push)](https://github.com/escalate/ansible-raspberry-docker/actions?query=workflow%3ACI)
+
 An Ansible role that manages [Docker CE](https://www.docker.com) on Raspberry Pi OS.
 
 ## Install
