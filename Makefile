@@ -32,9 +32,6 @@ verify:
 destroy:
 	molecule destroy
 
-.PHONY: requirements
-requirements:
-
 .PHONY: version
 version:
 	ansible --version
