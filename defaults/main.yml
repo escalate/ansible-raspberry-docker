@@ -1,7 +1,7 @@
 docker_version: 5:20.10.2~3-0~debian-buster
 docker_containerd_version: 1.4.3-1
 docker_package_arch: amd64
-docker_python_version: 4.2.2
+docker_python_version: 4.4.1
 docker_system_prune_cron: true
 docker_daemon_json:
   live-restore: true
