@@ -3,30 +3,30 @@
     file: armv7.yml
   when: ansible_architecture == 'armv7l'
 
-- name: Install Docker SDK prerequisites
+- name: Install SDK prerequisites
   ansible.builtin.apt:
     name: python-backports.ssl-match-hostname
     state: present
     update_cache: true
 
-- name: Install Docker SDK for Python
+- name: Install SDK for Python
   ansible.builtin.pip:
     name: "docker=={{ docker_python_version }}"
     state: present
 
-- name: Add Docker GPG key
+- name: Add GPG key fo apt repository
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     state: present
 
-- name: Setup Docker repository
+- name: Configure apt repository
   ansible.builtin.apt_repository:
     repo: "deb [arch={{ docker_package_arch }}] https://download.docker.com/linux/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} stable"
     state: present
     filename: docker-ce-stable
 
-- name: Install Docker packages
+- name: Install packages
   ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
@@ -37,7 +37,7 @@
       - "docker-ce-cli={{ docker_version }}"
       - "containerd.io={{ docker_containerd_version }}"
 
-- name: Add version pinning for Docker packages
+- name: Add version pinning for packages
   ansible.builtin.copy:
     content: |
             Package: docker-ce
@@ -56,7 +56,7 @@
     group: root
     mode: 0644
 
-- name: Add Docker system prune cron job
+- name: Add system prune cron job
   ansible.builtin.cron:
     name: docker_system_prune
     minute: "30"
@@ -66,18 +66,18 @@
     job: "docker system prune --volumes --force"
   when: docker_system_prune_cron
 
-- name: Start and enable Docker daemon
+- name: Start and enable service
   ansible.builtin.systemd:
     name: docker
     state: started
     enabled: true
     daemon_reload: true
 
-- name: Configure Docker daemon
+- name: Create service configuration
   ansible.builtin.template:
     src: daemon.json.j2
     dest: /etc/docker/daemon.json
     owner: root
     group: root
     mode: 0644
-  notify: Restart Docker service
+  notify: Restart service
