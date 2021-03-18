@@ -1,5 +1,5 @@
 - name: Prepare
   hosts: all
   roles:
-    - role: raspberry_common
+    - role: common
       tags: common
