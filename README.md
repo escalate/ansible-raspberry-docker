@@ -7,7 +7,7 @@ An Ansible role that manages [Docker CE](https://www.docker.com) on Raspberry Pi
 ## Install
 
 ```
-$ ansible-galaxy install escalate.raspberry_docker
+$ ansible-galaxy install escalate.docker
 ```
 
 ## Role Variables
@@ -26,7 +26,7 @@ This role relies on the following dependencies:
 ```
 - hosts: all
   roles:
-    - role: escalate.raspberry_docker
+    - role: escalate.docker
       tags: docker
 ```
 
