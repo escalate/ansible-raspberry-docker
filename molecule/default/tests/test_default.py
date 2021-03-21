@@ -4,9 +4,20 @@
 def test_daemon_config(host):
     """Check docker daemon config"""
     f = host.file("/etc/docker/daemon.json")
-    assert f.exists
+    assert f.is_file
     assert f.user == "root"
     assert f.group == "root"
+
+    config = (
+                "{\n"
+                "  \"live-restore\": true,\n"
+                "  \"log-driver\": \"local\",\n"
+                "  \"log-opts\": {\n"
+                "    \"max-size\": \"100m\"\n"
+                "  }\n"
+                "}\n"
+    )
+    assert config in f.content_string
 
 
 def test_cron_job(host):
