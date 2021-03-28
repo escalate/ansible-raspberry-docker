@@ -80,4 +80,4 @@
     owner: root
     group: root
     mode: 0644
-  notify: Restart service
+  notify: Restart docker service
