@@ -1,8 +1,3 @@
-- name: Load variables for ARMv7 systems
-  ansible.builtin.include_vars:
-    file: armv7.yml
-  when: ansible_architecture == 'armv7l'
-
 - name: Install SDK prerequisites
   ansible.builtin.apt:
     name: python-backports.ssl-match-hostname
