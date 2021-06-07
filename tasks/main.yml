@@ -58,7 +58,7 @@
     hour: "3"
     weekday: "6"
     user: root
-    job: "docker system prune --volumes --force"
+    job: "docker system prune --all --volumes --force"
   when: docker_system_prune_cron
 
 - name: Start and enable service

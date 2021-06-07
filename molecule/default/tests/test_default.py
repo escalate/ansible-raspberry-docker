@@ -22,7 +22,7 @@ def test_daemon_config(host):
 
 def test_cron_job(host):
     """Check cron job"""
-    cmd = "docker system prune --volumes --force"
+    cmd = "docker system prune --all --volumes --force"
     f = host.file("/var/spool/cron/crontabs/root").content_string
     assert cmd in f
 
