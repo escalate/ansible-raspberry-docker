@@ -9,13 +9,13 @@ def test_daemon_config(host):
     assert f.group == "root"
 
     config = (
-                "{\n"
-                "  \"live-restore\": true,\n"
-                "  \"log-driver\": \"local\",\n"
-                "  \"log-opts\": {\n"
-                "    \"max-size\": \"100m\"\n"
-                "  }\n"
-                "}\n"
+        "{\n"
+        "  \"live-restore\": true,\n"
+        "  \"log-driver\": \"local\",\n"
+        "  \"log-opts\": {\n"
+        "    \"max-size\": \"100m\"\n"
+        "  }\n"
+        "}\n"
     )
     assert config in f.content_string
 
