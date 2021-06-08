@@ -8,3 +8,4 @@ docker_daemon_json:
   log-opts:
     max-size: 100m
 docker_networks: []
+  # - internal
