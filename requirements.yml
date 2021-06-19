@@ -1,4 +1,3 @@
 roles:
   - name: common
-    src: https://github.com/escalate/ansible-raspberry-common.git
-    scm: git
+    src: escalate.common
