@@ -73,7 +73,7 @@
   notify: Restart docker service
 
 - name: Force all notified handlers to run at this point
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Create networks
   community.docker.docker_network:
