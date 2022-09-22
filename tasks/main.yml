@@ -28,19 +28,8 @@
       - "containerd.io={{ docker_containerd_version }}"
 
 - name: Add version pinning for packages
-  ansible.builtin.copy:
-    content: |
-            Package: docker-ce
-            Pin: version {{ docker_version }}
-            Pin-Priority: 1000
-
-            Package: docker-ce-cli
-            Pin: version {{ docker_version }}
-            Pin-Priority: 1000
-
-            Package: containerd.io
-            Pin: version {{ docker_containerd_version }}
-            Pin-Priority: 1000
+  ansible.builtin.template:
+    src: docker.j2
     dest: /etc/apt/preferences.d/docker
     owner: root
     group: root
