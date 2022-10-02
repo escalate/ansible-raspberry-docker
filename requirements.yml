@@ -4,3 +4,8 @@ roles:
 
   - name: cron
     src: escalate.cron
+
+collections:
+  - name: community.docker
+
+  - name: community.general
