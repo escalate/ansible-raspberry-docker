@@ -25,8 +25,8 @@
     update_cache: true
   vars:
     packages:
-      - "docker-ce={{ docker_version }}"
-      - "docker-ce-cli={{ docker_version }}"
+      - "docker-ce=5:{{ docker_version }}~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release }}"
+      - "docker-ce-cli=5:{{ docker_version }}~debian.{{ ansible_distribution_major_version }}~{{ ansible_distribution_release }}"
       - "containerd.io={{ docker_containerd_version }}"
 
 - name: Add version pinning for packages
