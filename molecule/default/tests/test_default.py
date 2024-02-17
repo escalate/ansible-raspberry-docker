@@ -13,6 +13,7 @@ def test_daemon_config(host):
         "  \"live-restore\": true,\n"
         "  \"log-driver\": \"local\",\n"
         "  \"log-opts\": {\n"
+        "    \"max-file\": \"7\",\n"
         "    \"max-size\": \"100m\"\n"
         "  }\n"
         "}"
