@@ -82,3 +82,7 @@
     ipam_config:
       - subnet: "{{ item.subnet }}"
   loop: "{{ docker_networks }}"
+
+- name: Regather facts
+  ansible.builtin.setup:
+    gather_subset: all
