@@ -37,6 +37,15 @@
     group: root
     mode: 0644
 
+- name: Create service configuration
+  ansible.builtin.template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart docker service
+
 - name: Create Docker system prune script
   ansible.builtin.copy:
     src: docker-system-prune.sh
@@ -57,21 +66,18 @@
     job: /usr/local/bin/docker-system-prune.sh
   when: docker_system_prune_cron
 
-- name: Start and enable service
+- name: Start service
   ansible.builtin.systemd:
     name: docker
     state: started
+    daemon_reload: true
+  register: docker_service_started
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: docker
     enabled: true
     daemon_reload: true
-
-- name: Create service configuration
-  ansible.builtin.template:
-    src: daemon.json.j2
-    dest: /etc/docker/daemon.json
-    owner: root
-    group: root
-    mode: 0644
-  notify: Restart docker service
 
 - name: Force all notified handlers to run at this point
   ansible.builtin.meta: flush_handlers
