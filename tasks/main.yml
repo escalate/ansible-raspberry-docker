@@ -35,7 +35,7 @@
     dest: /etc/apt/preferences.d/docker
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Create service configuration
   ansible.builtin.template:
@@ -43,7 +43,7 @@
     dest: /etc/docker/daemon.json
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Restart docker service
 
 - name: Create Docker system prune script
@@ -52,7 +52,7 @@
     dest: /usr/local/bin/docker-system-prune.sh
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   when: docker_system_prune_cron
 
 - name: Add Docker system prune cron job

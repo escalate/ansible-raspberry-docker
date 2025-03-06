@@ -10,11 +10,11 @@ def test_daemon_config(host):
 
     config = (
         "{\n"
-        "  \"live-restore\": true,\n"
-        "  \"log-driver\": \"local\",\n"
-        "  \"log-opts\": {\n"
-        "    \"max-file\": \"5\",\n"
-        "    \"max-size\": \"100m\"\n"
+        '  "live-restore": true,\n'
+        '  "log-driver": "local",\n'
+        '  "log-opts": {\n'
+        '    "max-file": "5",\n'
+        '    "max-size": "100m"\n'
         "  }\n"
         "}"
     )
